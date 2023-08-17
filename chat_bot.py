@@ -9,6 +9,13 @@ from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVC
 import csv
 import warnings
+from flask import Flask, render_template, request, jsonify
+from flask_wtf import FlaskForm
+from wtforms import StringField, BooleanField
+from wtforms.validators import DataRequired
+app = Flask(__name__)
+
+
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
@@ -19,8 +26,6 @@ cols = cols[:-1]
 x = training[cols]
 y = training['prognosis']
 y1 = y
-
-
 reduced_data = training.groupby(training['prognosis']).max()
 
 # mapping strings to numbers
@@ -38,21 +43,32 @@ testy = le.transform(testy)
 
 clf1 = DecisionTreeClassifier()
 clf = clf1.fit(x_train, y_train)
-# print(clf.score(x_train,y_train))
-# print ("cross result========")
 scores = cross_val_score(clf, x_test, y_test, cv=3)
-# print (scores)
-print(scores.mean())
-
 
 model = SVC()
 model.fit(x_train, y_train)
-print("for svm: ")
-print(model.score(x_test, y_test))
+
 
 importances = clf.feature_importances_
 indices = np.argsort(importances)[::-1]
 features = cols
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        name = request.form.get('message')
+
+    return render_template('index.html')
+
+
+@app.route('/get', methods=['GET', 'POST'])
+def get():
+    data = {"message": "its working"}
+    return jsonify(data)
+
+
+# ------------------------------------------------------------------------------
 
 
 def readn(nstr):
@@ -119,13 +135,6 @@ def getprecautionDict():
         for row in csv_reader:
             _prec = {row[0]: [row[1], row[2], row[3], row[4]]}
             precautionDictionary.update(_prec)
-
-
-def getInfo():
-    print("-----------------------------------HealthCare ChatBot-----------------------------------")
-    print("\nYour Name? \t\t\t\t", end="->")
-    name = input("")
-    print("Hello, ", name)
 
 
 def check_pattern(dis_list, inp):
@@ -275,6 +284,10 @@ def tree_to_code(tree, feature_names):
 getSeverityDict()
 getDescription()
 getprecautionDict()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 getInfo()
 while True:
     tree_to_code(clf, cols)
