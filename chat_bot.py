@@ -9,7 +9,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVC
 import csv
 import warnings
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired
@@ -64,9 +64,30 @@ def index():
 
 @app.route('/get', methods=['GET', 'POST'])
 def get():
-    data = {"message": "its working"}
-    return jsonify(data)
+    return render_template('landing.html')
 
+
+name = ""
+
+
+@app.route('/name', methods=['GET', 'POST'])
+def get_name():
+    global name
+    if request.method == 'POST':
+        name = str(request.form.get('name')).capitalize()
+        return redirect(url_for('symptoms'))
+    return render_template('form.html')
+
+
+@app.route('/symptoms', methods=['GET', 'POST'])
+def symptoms():
+    global symptom
+    if request.method == 'POST':
+        symptom = str(request.form.get('symptom'))
+        tree_to_code(clf, cols, symptom)
+        return redirect()
+    global name
+    return render_template('name.html', name=name)
 
 # ------------------------------------------------------------------------------
 
@@ -288,10 +309,10 @@ getprecautionDict()
 if __name__ == '__main__':
     app.run(debug=True)
 
-getInfo()
-while True:
-    tree_to_code(clf, cols)
-    next = input("wanna continue y/n :")
-    print("----------------------------------------------------------------------------------------")
-    if next.lower() == 'no':
-        break
+# getInfo()
+# while True:
+#     tree_to_code(clf, cols)
+#     next = input("wanna continue y/n :")
+#     print("----------------------------------------------------------------------------------------")
+#     if next.lower() == 'no':
+#         break
