@@ -54,23 +54,10 @@ indices = np.argsort(importances)[::-1]
 features = cols
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        name = request.form.get('message')
-
-    return render_template('index.html')
-
-
-@app.route('/get', methods=['GET', 'POST'])
-def get():
-    return render_template('landing.html')
-
-
 name = ""
 
 
-@app.route('/name', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def get_name():
     global name
     if request.method == 'POST':
@@ -81,14 +68,22 @@ def get_name():
 
 @app.route('/symptoms', methods=['GET', 'POST'])
 def symptoms():
-    global symptom
     if request.method == 'POST':
         symptom = str(request.form.get('symptom'))
-        tree_to_code(clf, cols, symptom)
-        return redirect()
-    global name
+        cnf, cnf_dieses = tree_to_code(clf, cols, symptom)
+        print("one", cnf, "two", cnf_dieses)
+        while True:
+            if cnf == 1:
+                return redirect('sevear')
+            else:
+                return render_template('name.html', name=name, error="Enter valid symptom.")
+        return "we will"
     return render_template('name.html', name=name)
 
+
+@app.route('/sevear', methods=['GET', 'POST'])
+def sevear():
+    return "next level"
 # ------------------------------------------------------------------------------
 
 
@@ -194,7 +189,7 @@ def print_disease(node):
     return list(map(lambda x: x.strip(), list(disease)))
 
 
-def tree_to_code(tree, feature_names):
+def tree_to_code(tree, feature_names, disease_input):
     tree_ = tree.tree_
     feature_name = [
         feature_names[i] if i != _tree.TREE_UNDEFINED else "undefined!"
@@ -206,27 +201,26 @@ def tree_to_code(tree, feature_names):
 
     while True:
 
-        print("\nEnter the symptom you are experiencing  \t\t", end="->")
-        disease_input = input("")
         conf, cnf_dis = check_pattern(chk_dis, disease_input)
-        if conf == 1:
-            print("searches related to input: ")
-            for num, it in enumerate(cnf_dis):
-                print(num, ")", it)
-            if num != 0:
-                print(f"Select the one you meant (0 - {num}):  ", end="")
-                conf_inp = int(input(""))
-            else:
-                conf_inp = 0
+        return conf, cnf_dis
+        # if conf == 1:
+        #     print("searches related to input: ")
+        #     for num, it in enumerate(cnf_dis):
+        #         print(num, ")", it)
+        #     if num != 0:
+        #         print(f"Select the one you meant (0 - {num}):  ", end="")
+        #         conf_inp = int(input(""))
+        #     else:
+        #         conf_inp = 0
 
-            disease_input = cnf_dis[conf_inp]
-            break
-            # print("Did you mean: ",cnf_dis,"?(yes/no) :",end="")
-            # conf_inp = input("")
-            # if(conf_inp=="yes"):
-            #     break
-        else:
-            print("Enter valid symptom.")
+        #     disease_input = cnf_dis[conf_inp]
+        #     break
+        #     # print("Did you mean: ",cnf_dis,"?(yes/no) :",end="")
+        #     # conf_inp = input("")
+        #     # if(conf_inp=="yes"):
+        #     #     break
+        # else:
+        #     print("Enter valid symptom.")
 
     while True:
         try:

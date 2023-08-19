@@ -590,6 +590,34 @@ input[type='number']::-webkit-outer-spin-button,
   right: 0.5rem;
 }
 
+.-top-6 {
+  top: -1.5rem;
+}
+
+.-top-8 {
+  top: -2rem;
+}
+
+.-top-10 {
+  top: -2.5rem;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
+.left-\[45\%\] {
+  left: 45%;
+}
+
+.left-\[40\%\] {
+  left: 40%;
+}
+
+.left-\[38\%\] {
+  left: 38%;
+}
+
 .float-right {
   float: right;
 }
@@ -878,6 +906,11 @@ input[type='number']::-webkit-outer-spin-button,
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .font-semibold {
   font-weight: 600;
 }
@@ -909,6 +942,11 @@ input[type='number']::-webkit-outer-spin-button,
 .text-slate-300 {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .shadow-md {
