@@ -66,14 +66,21 @@ def get_name():
     return render_template('form.html')
 
 
+cnf_d = []
+sym = ''
+
+
 @app.route('/symptoms', methods=['GET', 'POST'])
 def symptoms():
+    global sym, cnf_d
     if request.method == 'POST':
         symptom = str(request.form.get('symptom'))
         cnf, cnf_dieses = tree_to_code(clf, cols, symptom)
         print("one", cnf, "two", cnf_dieses)
         while True:
             if cnf == 1:
+                cnf_d = cnf_dieses
+                sym = symptom
                 return redirect('sevear')
             else:
                 return render_template('name.html', name=name, error="Enter valid symptom.")
@@ -83,7 +90,11 @@ def symptoms():
 
 @app.route('/sevear', methods=['GET', 'POST'])
 def sevear():
-    return "next level"
+    global cnf_d
+    print("therrrrrr", cnf_d)
+    return render_template('sevear.html', name=name, symptom=sym, diesase=cnf_d)
+
+
 # ------------------------------------------------------------------------------
 
 
