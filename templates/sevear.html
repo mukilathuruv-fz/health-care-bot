@@ -45,9 +45,12 @@
           <li
             class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
           >
-            {% for d in diesase %}
-            <span>{{d}}</span>
-            {%endfor%}
+            <p class="mb-2">Which level</p>
+            <ol class="px-3 list-decimal">
+              {% for d in diesase %}
+              <li class="list-item py-1">{{d}}</li>
+              {%endfor%}
+            </ol>
           </li>
           <li class="clear-both"></li>
         </ul>
@@ -61,7 +64,6 @@
               placeholder="Enter your symptoms..."
               required
               class="bg-slate-100/30 h-full flex-1 text-lg pr-12 font-semibold px-2 focus:outline-none"
-              minlength="3"
             />
             <button type="submit" class="absolute right-1 px-2 top-3">
               <svg

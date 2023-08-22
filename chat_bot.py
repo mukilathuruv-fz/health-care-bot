@@ -113,6 +113,7 @@ severityDictionary = dict()
 description_list = dict()
 precautionDictionary = dict()
 
+
 symptoms_dict = {}
 
 for index, symptom in enumerate(x):
