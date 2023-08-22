@@ -586,6 +586,14 @@ input[type='number']::-webkit-outer-spin-button,
   top: 0.75rem;
 }
 
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
 .float-right {
   float: right;
 }
@@ -603,12 +611,17 @@ input[type='number']::-webkit-outer-spin-button,
   margin-bottom: 0.5rem;
 }
 
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
 
-.block {
-  display: block;
+.mt-auto {
+  margin-top: auto;
 }
 
 .flex {
@@ -647,6 +660,26 @@ input[type='number']::-webkit-outer-spin-button,
   height: 100vh;
 }
 
+.h-\[60\%\] {
+  height: 60%;
+}
+
+.h-\[90\%\] {
+  height: 90%;
+}
+
+.h-\[80\%\] {
+  height: 80%;
+}
+
+.h-\[83\%\] {
+  height: 83%;
+}
+
+.h-\[84\%\] {
+  height: 84%;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -681,6 +714,14 @@ input[type='number']::-webkit-outer-spin-button,
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .rounded {
@@ -733,6 +774,11 @@ input[type='number']::-webkit-outer-spin-button,
   padding-right: 0.5rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -763,9 +809,8 @@ input[type='number']::-webkit-outer-spin-button,
   padding-bottom: 1.25rem;
 }
 
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+.pb-10 {
+  padding-bottom: 2.5rem;
 }
 
 .pr-12 {
@@ -776,8 +821,8 @@ input[type='number']::-webkit-outer-spin-button,
   padding-top: 1.25rem;
 }
 
-.pl-3 {
-  padding-left: 0.75rem;
+.pl-1 {
+  padding-left: 0.25rem;
 }
 
 .text-center {

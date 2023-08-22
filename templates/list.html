@@ -15,7 +15,7 @@
       class="h-screen bg-slate-200 w-full flex justify-center pt-5 text-black"
     >
       <div
-        class="h-[90vh] w-[600px] py-5 bg-indigo-400 rounded-md shadow-md text-slate-800 relative"
+        class="h-[90vh] w-[600px] py-5 pb-10 bg-indigo-400 rounded-md shadow-md text-slate-800 relative"
       >
         <h1
           class="text-3xl font-semibold text-slate-700 text-center capitalize py-3"
@@ -23,7 +23,9 @@
           Health Care ChatBot
         </h1>
         {% if name%}
-        <ul class="px-6 py-2 font-semibold capitalize">
+        <ul
+          class="px-6 py-2 font-semibold capitalize h-[84%] overflow-y-scroll"
+        >
           <li
             class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
           >
@@ -53,11 +55,65 @@
             </ol>
           </li>
           <li class="clear-both"></li>
+          <li
+            class="float-right my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            {{severarity}}
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            please select which of followings you have
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <form method="post">
+              <ol>
+                {% for qes in symptoms_list %}
+                <li class="py-1">
+                  <label for="{{qes}}" class="pl-1">
+                    <input
+                      type="checkbox"
+                      id="{{qes}}"
+                      name="symptoms_list"
+                      value="{{qes}}"
+                      class="mx-1"
+                    />
+                    {{qes}}
+                  </label>
+                </li>
+                {%endfor%}
+              </ol>
+              <div>
+                <button class="absolute right-1 px-2 bottom-3 z-10">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-8 w-8"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </li>
+          <li class="clear-both"></li>
         </ul>
-        {%endif%} {%if error%}<h3 class="mt-auto text-center text-red-500 font-semibold text-2xl capitalize"> {{error}} <h3/>{%endif%}
+        {%endif%}
         <form method="post" class="absolute bottom-0 w-full h-14">
           <div class="relative w-full flex h-full">
             <input
+              disabled
               type="text"
               id="severarity"
               name="severarity"
@@ -65,22 +121,6 @@
               required
               class="bg-slate-100/30 h-full flex-1 text-lg pr-12 font-semibold px-2 focus:outline-none"
             />
-            <button type="submit" class="absolute right-1 px-2 top-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-8 w-8"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                />
-              </svg>
-            </button>
           </div>
         </form>
       </div>

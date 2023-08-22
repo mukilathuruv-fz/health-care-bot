@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="{{url_for('static',filename='css/main.css')}}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <main
+      class="h-screen bg-slate-200 w-full flex justify-center pt-5 text-black"
+    >
+      <div
+        class="h-[90vh] w-[600px] py-5 pb-10 bg-indigo-400 rounded-md shadow-md text-slate-800 relative"
+      >
+        <h1
+          class="text-3xl font-semibold text-slate-700 text-center capitalize py-3"
+        >
+          Health Care ChatBot
+        </h1>
+        {% if name%}
+        <ul
+          class="px-6 py-2 font-semibold capitalize h-[84%] overflow-y-scroll"
+        >
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>hello {{name}}</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>what is the symptom you are experiencing</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-right my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>{{symptom}}</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <p class="mb-2">Which level</p>
+            <ol class="px-3 list-decimal">
+              {% for d in diesase %}
+              <li class="list-item py-1">{{d}}</li>
+              {%endfor%}
+            </ol>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-right my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            {{severarity}}
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            please select which of followings you have
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <ol>
+              {% for qes in symptoms_list %}
+              <li class="py-1">
+                <label for="{{qes}}" class="pl-1">
+                  <input
+                    type="checkbox"
+                    id="{{qes}}"
+                    name="symptoms_list"
+                    value="{{qes}}"
+                    class="mx-1"
+                  />
+                  {{qes}}
+                </label>
+              </li>
+              {%endfor%}
+            </ol>
+          </li>
+          <li class="clear-both"></li>
+
+          <li
+            class="float-right my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <p class="mb-2">my Symptoms</p>
+          </li>
+          <li class="clear-both"></li>
+
+          <li
+            class="float-right my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <ol class="px-3 list-decimal">
+              {% for d in symptoms_exp %}
+              <li class="list-item py-1">{{d}}</li>
+              {%endfor%}
+            </ol>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>how long you are having these symptoms</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-right my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>{{days}} days</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>{{sentence}}</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 border p-3 py-1 border-slate-500 rounded-md"
+          >
+            <span>Precausions</span>
+            <ul>
+              {%for pre in precution_list %}
+              <li>{{ pre }}</li>
+              {%endfor%}
+            </ul>
+          </li>
+          <li class="clear-both"></li>
+        </ul>
+        {%endif%}
+        <form method="post" class="absolute bottom-0 w-full h-14">
+          <div class="relative w-full flex h-full">
+            <input
+              type="text"
+              id="day"
+              name="day"
+              placeholder="number of days"
+              required
+              class="bg-slate-100/30 h-full flex-1 text-lg pr-12 font-semibold px-2 focus:outline-none"
+            />
+            <button type="submit" class="absolute right-1 px-2 top-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-8 w-8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
