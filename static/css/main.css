@@ -624,8 +624,24 @@ input[type='number']::-webkit-outer-spin-button,
   margin-top: auto;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
+.mr-8 {
+  margin-right: 2rem;
+}
+
+.mr-11 {
+  margin-right: 2.75rem;
+}
+
 .flex {
   display: flex;
+}
+
+.grid {
+  display: grid;
 }
 
 .list-item {
@@ -680,6 +696,22 @@ input[type='number']::-webkit-outer-spin-button,
   height: 84%;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
+.h-\[40px\] {
+  height: 40px;
+}
+
+.h-\[60px\] {
+  height: 60px;
+}
+
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -702,6 +734,10 @@ input[type='number']::-webkit-outer-spin-button,
 
 .flex-col {
   flex-direction: column;
+}
+
+.place-content-center {
+  place-content: center;
 }
 
 .items-center {
@@ -765,6 +801,11 @@ input[type='number']::-webkit-outer-spin-button,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-indigo-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+}
+
 .p-3 {
   padding: 0.75rem;
 }
@@ -825,6 +866,10 @@ input[type='number']::-webkit-outer-spin-button,
   padding-left: 0.25rem;
 }
 
+.pr-5 {
+  padding-right: 1.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -875,6 +920,11 @@ input[type='number']::-webkit-outer-spin-button,
 .text-slate-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .shadow-md {

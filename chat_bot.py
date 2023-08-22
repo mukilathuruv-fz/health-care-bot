@@ -115,14 +115,17 @@ def symlist():
 sentence = precution_list = None
 number_of_days = None
 
+disease = None
+des = None
+
 
 @app.route('/day', methods=['GET', 'POST'])
 def number_day():
-    global symptoms_exp, symptoms_list, sentence, precution_list, number_of_days
+    global symptoms_exp, symptoms_list, sentence, precution_list, number_of_days, des, disease
     if request.method == 'POST':
         day = int(request.form.get('day'))
         number_of_days = day
-        sentence, precution_list = give_result(day)
+        sentence, precution_list, disease, des = give_result(day)
         return redirect(url_for('result'))
 
     return render_template('day.html', name=name, symptom=sym, diesase=cnf_d, severarity=severarity, symptoms_list=symptoms_list, symptoms_exp=symptoms_exp)
@@ -130,8 +133,8 @@ def number_day():
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
-    global symptoms_exp, symptoms_list, sentence, precution_list, number_of_days
-    return render_template('result.html', name=name, symptom=sym, diesase=cnf_d, severarity=severarity, symptoms_list=symptoms_list, symptoms_exp=symptoms_exp, sentence=sentence, precution_list=precution_list, days=number_of_days)
+    global symptoms_exp, symptoms_list, sentence, precution_list, number_of_days, des, disease
+    return render_template('result.html', name=name, symptom=sym, diesase=cnf_d, severarity=severarity, symptoms_list=symptoms_list, symptoms_exp=symptoms_exp, sentence=sentence, precution_list=precution_list, days=number_of_days, des=des, disease=disease)
 
 
 # ------------------------------------------------------------------------------
@@ -294,21 +297,21 @@ def give_result(num_days):
     global symptoms_exp, present_disease
     second_prediction = sec_predict(symptoms_exp)
     sentence = calc_condition(symptoms_exp, num_days)
+    disease = None
+    des = None
     if (present_disease[0] == second_prediction[0]):
-        print("You may have ", present_disease[0])
-        print(description_list[present_disease[0]])
+        disease = present_disease[0]
+        des = description_list[present_disease[0]]
 
     else:
-        print("You may have ",
-              present_disease[0], "or ", second_prediction[0])
-        print(description_list[present_disease[0]])
-        print(description_list[second_prediction[0]])
+        disease = second_prediction[0]
+        des = description_list[second_prediction[0]]
 
     precution_list = precautionDictionary[present_disease[0]]
     # print("Take following measures : ")
     # for i, j in enumerate(precution_list):
     #     print(i+1, ")", j)
-    return sentence, precution_list
+    return sentence, precution_list, disease, des
 
 
 getSeverityDict()
