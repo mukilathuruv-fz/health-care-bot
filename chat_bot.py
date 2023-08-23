@@ -1,18 +1,19 @@
-import re
+import csv
 import pandas as pd
 import pyttsx3
 from sklearn import preprocessing
 from sklearn.tree import DecisionTreeClassifier, _tree
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.svm import SVC
-import csv
 import warnings
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired
+import re
+
+
 app = Flask(__name__)
 
 
@@ -60,6 +61,19 @@ sym = ''
 severarity = ''
 symptoms_exp = []
 symptoms_list = []
+sentence = precution_list = None
+number_of_days = None
+disease = None
+des = None
+severityDictionary = dict()
+description_list = dict()
+precautionDictionary = dict()
+
+feature_name = []
+disease_input = ''
+tree_ = None
+present_disease = None
+symptoms_dict = {}
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -112,13 +126,6 @@ def symlist():
     return render_template('list.html', name=name, symptom=sym, diesase=cnf_d, severarity=severarity, symptoms_list=symptoms_list)
 
 
-sentence = precution_list = None
-number_of_days = None
-
-disease = None
-des = None
-
-
 @app.route('/day', methods=['GET', 'POST'])
 def number_day():
     global symptoms_exp, symptoms_list, sentence, precution_list, number_of_days, des, disease
@@ -150,13 +157,6 @@ def readn(nstr):
     engine.runAndWait()
     engine.stop()
 
-
-severityDictionary = dict()
-description_list = dict()
-precautionDictionary = dict()
-
-
-symptoms_dict = {}
 
 for index, symptom in enumerate(x):
     symptoms_dict[symptom] = index
@@ -246,12 +246,6 @@ def print_disease(node):
     return list(map(lambda x: x.strip(), list(disease)))
 
 
-feature_name = []
-disease_input = ''
-tree_ = None
-present_disease = None
-
-
 def tree_to_code(tree, feature_names, disease_in):
     global feature_name, disease_input, tree_
     disease_input = disease_in
@@ -308,9 +302,6 @@ def give_result(num_days):
         des = description_list[second_prediction[0]]
 
     precution_list = precautionDictionary[present_disease[0]]
-    # print("Take following measures : ")
-    # for i, j in enumerate(precution_list):
-    #     print(i+1, ")", j)
     return sentence, precution_list, disease, des
 
 
