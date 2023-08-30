@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="{{url_for('static',filename='css/main.css')}}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <main
+      class="h-screen bg-gradient-to-r from-sky-500 to-indigo-500 w-full flex justify-center items-center text-black"
+    >
+      <div
+        class="h-[300px] w-[500px] py-5 bg-white rounded-md shadow-md text-slate-800"
+      >
+        <h1
+          class="text-3xl animate-pulse font-semibold text-slate-700 text-center capitalize py-3"
+        >
+          Health Care ChatBot
+        </h1>
+        {% if name%}
+        <ul>
+          <li>
+            <span>hello {{name}}</span>
+          </li>
+        </ul>
+        {%endif%}
+        <form
+          action="{{url_for('get_name')}}"
+          method="post"
+          class="w-full flex justify-center items-center h-1/2 relative"
+        >
+          <div class="flex flex-col gap-3">
+            <label for="usename" class="capitalize font-semibold"
+              >enter your name</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="username"
+              required
+              class="bg-slate-200 py-2 px-8 flex-1 text-slate-800 text-lg rounded"
+            />
+            <button
+              type="submit"
+              class="bg-indigo-600 py-1 rounded text-white font-semibold capitalize"
+            >
+              go to chatbot
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

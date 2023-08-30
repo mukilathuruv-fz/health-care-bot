@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="{{url_for('static',filename='css/main.css')}}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <main
+      class="h-screen bg-gradient-to-r from-sky-500 to-indigo-500 w-full flex justify-center pt-5 text-black"
+    >
+      <div
+        class="h-[90vh] w-[600px] py-5 bg-slate-200 rounded-md shadow-md text-slate-800 relative"
+      >
+        <h1
+          class="text-3xl font-semibold text-slate-700 text-center capitalize py-3"
+        >
+          Health Care ChatBot
+        </h1>
+        {% if name%}
+        <ul class="px-6 py-2 text-sm">
+          <li
+            class="float-left my-2 p-3 py-1 bg-blue-600 text-white rounded-md"
+          >
+            <span>hello {{name}}</span>
+          </li>
+          <li class="clear-both"></li>
+          <li
+            class="float-left my-2 p-3 py-1 bg-blue-600 text-white rounded-md"
+          >
+            <span>what is the symptom you are experiencing</span>
+          </li>
+          <li class="clear-both"></li>
+        </ul>
+        {%endif%}
+        <form method="post" class="absolute bottom-0 w-full h-14">
+          <div class="relative w-full flex h-full">
+            {%if error%}
+            <h1
+              class="font-semibold text-red-500 text-center capitalize absolute -top-10 text-lg left-[38%]"
+            >
+              {{error}}
+            </h1>
+            {%endif%}
+            <input
+              type="text"
+              id="symptom"
+              name="symptom"
+              placeholder="Enter your symptoms..."
+              required
+              class="bg-gray-300 h-full flex-1 text-lg pr-12 px-2 focus:outline-none"
+              minlength="3"
+            />
+            <button type="submit" class="absolute right-1 px-2 top-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-8 w-8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
