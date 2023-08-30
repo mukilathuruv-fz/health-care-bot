@@ -91,7 +91,6 @@ def symptoms():
     if request.method == 'POST':
         symptom = str(request.form.get('symptom'))
         cnf, cnf_dieses = tree_to_code(clf, cols, symptom)
-        print("one", cnf, "two", cnf_dieses)
         while True:
             if cnf == 1:
                 cnf_d = cnf_dieses
@@ -110,7 +109,6 @@ def sevear():
             severarity = int(request.form.get('severarity'))
             return redirect(url_for('symlist'))
         except Exception as error:
-            print(error)
             return render_template('sevear.html', name=name, symptom=sym, diesase=cnf_d, error="choose between numbers")
     return render_template('sevear.html', name=name, symptom=sym, diesase=cnf_d)
 
@@ -122,7 +120,6 @@ def symlist():
         symptoms_exp = request.form.getlist('symptoms_list')
         return redirect(url_for('number_day'))
     symptoms_list = recurse(0, 1)
-    print("list are", symptoms_list)
     return render_template('list.html', name=name, symptom=sym, diesase=cnf_d, severarity=severarity, symptoms_list=symptoms_list)
 
 
@@ -167,11 +164,9 @@ def calc_condition(exp, days):
     for item in exp:
         sum = sum+severityDictionary[item]
     if ((sum*days)/(len(exp)+1) > 13):
-        print("You should take the consultation from doctor. ")
         return "You should take the consultation from doctor. "
 
     else:
-        print("It might not be that bad but you should take precautions.")
         return "It might not be that bad but you should take precautions."
 
 
